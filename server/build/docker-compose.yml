@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  silo:
+    build:
+      args:
+        branch: master
+        servicename: CAServer.Silo
+    image: yongenportkey/portkey-server-silo:master
+  api:
+    build:
+      args:
+        branch: master
+        servicename: CAServer.HttpApi.Host
+    image: yongenportkey/portkey-server-api:master
