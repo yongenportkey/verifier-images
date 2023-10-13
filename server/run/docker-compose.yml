@@ -1,75 +1,60 @@
 version: "3.5"
 services:
-  redis-server:
-    image: redis:6.2.8
-    restart: always
-    container_name: redis
-    networks:
-      verifier:
-        aliases:
-          - redis-server
-          - redis
-    ports:
-      - "6379:6379"
-    privileged: true
-    volumes:
-      - ./redis/data:/data
-      - ./redis/conf/redis.conf:/etc/redis/redis.conf
-    command: ["redis-server", "/etc/redis/redis.conf"]
+  redis:
+    image: redis:latest
 
-  mongodb-server:
+  mongodb:
     image: mongo:latest
-    restart: always
-    container_name: mongodb
-    hostname: mongodb
-    networks:
-      verifier:
-        aliases:
-          - mongodb-server
-          - mongodb
-    ports:
-      - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin123456
-    privileged: true
-    volumes:
-      - ./mongodb/datadb:/data/db
 
-  did-verifier-silo:
+  rabbitmq:
+    image: rabbitmq:latest
+
+  elasticsearch:
+    image: elasticsearch:8.10.2
+
+  did-server-dbmigrator:
+    image: yongenportkey/portkey-server-dbmigrator:master
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./appsettings-dbmigrator.json:/App/appsettings.json:rw
+
+  did-server-auth:
+    image: yongenportkey/portkey-server-auth:master
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./appsettings-authserver.json:/App/appsettings.json:rw
+    depends_on:
+      - redis
+      - rabbitmq
+
+  did-server-silo:
     image: yongenportkey/portkey-server-silo:master
-    restart: always
-    container_name: did-verifier-silo
-    networks:
-      verifier:
-        aliases:
-          - did-verifier-silo
-    ports:
-      - "9010:9010"
-      - "10010:10010"
-      - "20010:20010"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./appsettings-silo.json:/App/appsettings.json:rw
-    privileged: true
 
-  did-verifier-api:
+  did-server-api:
     image: yongenportkey/portkey-server-api:master
-    restart: always
-    container_name: did-verifier-api
-    networks:
-      verifier:
-        aliases:
-          - did-verifier-api
-    ports:
-      - "8010:8010"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./appsettings-api.json:/App/appsettings.json:rw
     depends_on:
-      - did-verifier-silo
-    privileged: true
+      - redis
+      - rabbitmq
+      - did-server-auth
+      - did-server-silo
 
-networks:
-  verifier:
-    driver: bridge
+  did-server-entity:
+    image: yongenportkey/portkey-server-entityeventhandler:master
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./appsettings-entityeventhandler.json:/App/appsettings.json:rw
+
+  did-server-contract:
+    image: yongenportkey/portkey-server-contracteventhandler:master
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./appsettings-contracteventhandler.json:/App/appsettings.json:rw
