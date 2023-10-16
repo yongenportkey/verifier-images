@@ -7,19 +7,30 @@ services:
     image: mongo:latest
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin123456
+      MONGO_INITDB_ROOT_PASSWORD: admin123
 
   rabbitmq:
     image: rabbitmq:latest
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin123456
 
   elasticsearch:
     image: elasticsearch:8.10.2
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
 
   did-server-dbmigrator:
     image: yongenportkey/portkey-server-dbmigrator:master
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./appsettings-dbmigrator.json:/App/appsettings.json:rw
+    depends_on:
+      - redis
+      - mongodb
+      - rabbitmq
+      - elasticsearch
 
   did-server-auth:
     image: yongenportkey/portkey-server-auth:master
@@ -27,24 +38,24 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ./appsettings-authserver.json:/App/appsettings.json:rw
     depends_on:
-      - redis
-      - rabbitmq
+      - did-server-dbmigrator
 
   did-server-silo:
     image: yongenportkey/portkey-server-silo:master
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./appsettings-silo.json:/App/appsettings.json:rw
+    depends_on:
+      - did-server-auth
 
   did-server-api:
     image: yongenportkey/portkey-server-api:master
+    restart: always
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./appsettings-api.json:/App/appsettings.json:rw
     depends_on:
-      - redis
-      - rabbitmq
-      - did-server-auth
+      - mongodb
       - did-server-silo
 
   did-server-entity:
@@ -52,9 +63,13 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./appsettings-entityeventhandler.json:/App/appsettings.json:rw
+    depends_on:
+      - did-server-api
 
   did-server-contract:
     image: yongenportkey/portkey-server-contracteventhandler:master
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./appsettings-contracteventhandler.json:/App/appsettings.json:rw
+    depends_on:
+      - did-server-entity
