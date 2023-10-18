@@ -37,3 +37,35 @@ To stop:
 cd server/run
 docker-compose down
 ```
+
+# Verifier
+
+## Build
+
+Fetches from https://github.com/Portkey-Wallet/portkey-DID-verifier.git and builds:
+
+```bash
+cd verifier/build
+docker-compose build
+```
+
+## Run
+
+Save your appsettings for each service in the `verifier/run/` folder as `verifier/run/<file>`:
+
+| Service |         File          |                                                       Reference                                                       |
+| :-----: | :-------------------: | :-------------------------------------------------------------------------------------------------------------------: |
+|  Silo   | appsettings-silo.json |     https://github.com/Portkey-Wallet/portkey-DID-verifier/blob/master/src/CAVerifierServer.Silo/appsettings.json     |
+|   Api   | appsettings-api.json  | https://github.com/Portkey-Wallet/portkey-DID-verifier/blob/master/src/CAVerifierServer.HttpApi.Host/appsettings.json |
+
+```bash
+cd verifier/run
+docker-compose up -d
+```
+
+To stop:
+
+```bash
+cd verifier/run
+docker-compose down
+```

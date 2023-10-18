@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  silo:
+    build:
+      args:
+        branch: master
+        servicename: CAVerifierServer.Silo
+    image: yongenportkey/portkey-verifier-silo:master
+  api:
+    build:
+      args:
+        branch: master
+        servicename: CAVerifierServer.HttpApi.Host
+    image: yongenportkey/portkey-verifier-api:master
