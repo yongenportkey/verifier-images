@@ -1,6 +1,6 @@
 {
   "ConnectionStrings": {
-    "Default": "mongodb://127.0.0.1:27017/CAServer"
+    "Default": "mongodb://127.0.0.1:27017/CAVerifierServer"
   },
   "OpenIddict": {
     "Applications": {
@@ -24,7 +24,7 @@
   },
   "ElasticUris": {
     "Uris": [
-      "http://elasticsearch:9200"
+      "http://127.0.0.1:9200"
     ]
   },
   "IndexSetting": {

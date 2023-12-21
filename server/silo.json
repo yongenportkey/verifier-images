@@ -2,19 +2,19 @@
   "Orleans": {
     "ClusterId": "CAServerSiloCluster",
     "ServiceId": "CAServerOrleansBasicService",
-    "AdvertisedIP": "192.168.67.51",
-    "GatewayPort" : 20001,
+    "AdvertisedIP": "127.0.0.1",
+    "GatewayPort": 20001,
     "SiloPort": 10001,
-    "MongoDBClient": "mongodb://admin:admin123@mongodb:27017/?maxPoolSize=555",
+    "MongoDBClient": "mongodb://127.0.0.1:27017/?maxPoolSize=555",
     "DataBase": "CAServerOrleansDB",
     "DashboardUserName": "sjn",
     "DashboardPassword": "123456",
     "DashboardCounterUpdateIntervalMs": 1000,
     "DashboardPort": 8088,
     "EventStoreConnection": "ConnectTo=tcp://admin:changeit@localhost:1113; HeartBeatTimeout=500",
-    "ClusterDbConnection": "192.168.66.245:6379",
+    "ClusterDbConnection": "127.0.0.1:6379",
     "ClusterDbNumber": 0,
-    "GrainStorageDbConnection": "192.168.66.245:6379",
+    "GrainStorageDbConnection": "127.0.0.1:6379",
     "GrainStorageDbNumber": 0
   },
   "CoinGecko": {
@@ -23,15 +23,13 @@
     }
   },
   "ConnectionStrings": {
-    "Default": "mongodb://admin:admin123@mongodb:27017/CAServer?authSource=admin"
+    "Default": "mongodb://127.0.0.1:27017/CAVerifierServer?authSource=admin"
   },
   "GraphQL": {
     "Configuration": "http://127.0.0.1:8083/Indexer_DApp/PortKeyIndexerCASchema/graphql"
   },
   "ElasticUris": {
-    "Uris": [
-      "http://elasticsearch:9200"
-    ]
+    "Uris": ["http://127.0.0.1:9200"]
   },
   "IndexSetting": {
     "NumberOfShards": 5,
@@ -49,19 +47,19 @@
       "AELF": {
         "ChainId": "AELF",
         "BaseUrl": "http://127.0.0.1:8000",
-        "ContractAddress": "***",
-        "TokenContractAddress": "***",
-        "CrossChainContractAddress": "***",
-        "PrivateKey": "***",
+        "ContractAddress": "2u6Dd139bHvZJdZ835XnNKL5y6cxqzV9PEWD5fZdQXdFZLgevc",
+        "TokenContractAddress": "JRmBduh4nXWi1aXgdUsj5gJrzeZb2LxmrAbf7W99faZSvoAaE",
+        "CrossChainContractAddress": "2SQ9LeGZYSWmfJcYuQkDQxgd3HzwjamAaaL4Tge2eFSXw2cseq",
+        "PrivateKey": "XXXXXX",
         "IsMainChain": true
       },
       "tDVV": {
         "ChainId": "tDVV",
         "BaseUrl": "http://127.0.0.1:8000",
-        "ContractAddress": "***",
-        "TokenContractAddress": "***",
-        "CrossChainContractAddress": "***",
-        "PrivateKey": "***",
+        "ContractAddress": "2iNerrufZ7rQsj5Ea6Rpbi9G4GMNyTMNe9CBhBUocE9JHnUYJC",
+        "TokenContractAddress": "7RzVGiuVWkvL4VfVHdZfQF2Tri3sgLe9U991bohHFfSRZXuGX",
+        "CrossChainContractAddress": "2snHc8AMh9QMbCAa7XXmdZZVM5EBZUUPDdLjemwUJkBnL6k8z9",
+        "PrivateKey": "XXXXXX",
         "IsMainChain": false
       }
     }
@@ -70,7 +68,7 @@
     "CAAccountRequestInfoMaxLength": 100,
     "CAAccountRequestInfoExpirationTime": 1
   },
-  "TokenPriceExpirationTime":{
+  "TokenPriceExpirationTime": {
     "Time": 3600
   }
 }

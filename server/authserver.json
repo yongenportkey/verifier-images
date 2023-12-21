@@ -16,21 +16,21 @@
     "IssuerUri": "http://127.0.0.1:8080"
   },
   "ConnectionStrings": {
-    "Default": "mongodb://mongodb:27017/CAServer"
+    "Default": "mongodb://127.0.0.1:27017/CAVerifierServer"
   },
   "Redis": {
-    "Configuration": "redis"
+    "Configuration": "127.0.0.1"
   },
   "StringEncryption": {
     "DefaultPassPhrase": "***"
   },
   "GraphQL": {
-    "Url": "http://127.0.0.1:8083/Indexer_DApp/PortKeyIndexerCASchema/graphql"
+    "Url": "https://dapp-portkey-test.portkey.finance/Portkey_DID/PortKeyIndexerCASchema/graphql"
   },
   "RabbitMQ": {
     "Connections": {
       "Default": {
-        "HostName": "rabbitmq",
+        "HostName": "127.0.0.1",
         "Port": "5672"
       }
     },
@@ -42,9 +42,7 @@
   "TimeRange": 1440,
   "ExpirationHour": 48,
   "ElasticUris": {
-    "Uris": [
-      "http://elasticsearch:9200"
-    ]
+    "Uris": ["http://127.0.0.1:9200"]
   },
   "IndexSetting": {
     "NumberOfShards": 5,

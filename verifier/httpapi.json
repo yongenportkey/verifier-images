@@ -3,10 +3,10 @@
     "CorsOrigins": "https://*.CAVerifierServer.com,http://localhost:4200"
   },
   "ConnectionStrings": {
-    "Default": "mongodb://mongodb:27017/CAVerifierServer"
+    "Default": "mongodb://localhost:27017/CAVerifierServer"
   },
   "Redis": {
-    "Configuration": "redis"
+    "Configuration": "127.0.0.1"
   },
   "AuthServer": {
     "Authority": "https://localhost:44391",
@@ -14,7 +14,7 @@
     "SwaggerClientId": "CAVerifierServer_Swagger"
   },
   "StringEncryption": {
-    "DefaultPassPhrase": "XXXXXXXX"
+    "DefaultPassPhrase": "BaVQBcEqaSRF7Pz0"
   },
   "Settings": {
     "Abp.Mailing.Smtp.Host": "smtppro.zoho.com",
@@ -49,7 +49,7 @@
   "Orleans": {
     "ClusterId": "CAVerifierServerSiloCluster",
     "ServiceId": "CAVerifierServerOrleansBasicService",
-    "MongoDBClient": "mongodb://mongodb:27017/?maxPoolSize=555",
+    "MongoDBClient": "mongodb://localhost:27017/?maxPoolSize=555",
     "DataBase": "CAVerifierServerOrleansDB"
   },
   "VerifierInfo": {
@@ -67,8 +67,7 @@
     "MainChain": {
       "ChainId": "AELF",
       "BaseUrl": "http://127.0.0.1:8000",
-      "CaContractAddress": "xxxxx",
-      "PrivateKey": "xxxxxx"
+      "CaContractAddress": "xxxxx"
     }
   },
   "Chains": {
@@ -77,14 +76,12 @@
         "ChainId": "AELF",
         "BaseUrl": "http://127.0.0.1:8000",
         "ContractAddress": "xxxx",
-        "PrivateKey": "xxxx",
         "IsMainChain": true
       },
       "tDVV": {
         "ChainId": "tDVV",
         "BaseUrl": "http://127.0.0.1:8000",
         "ContractAddress": "xxxx",
-        "PrivateKey": "xxxx",
         "IsMainChain": false
       }
     }

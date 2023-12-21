@@ -1,0 +1,38 @@
+version: "3.9"
+
+name: portkey-did-verifier
+services:
+  redis:
+    image: redis
+    ports:
+      - 5577:5577
+  mongodb:
+    image: mongo
+    network_mode: service:redis
+  did-verifier-dbmigrator:
+    build:
+      args:
+        branch: "${BRANCH}"
+        servicename: CAVerifierServer.DbMigrator
+    restart: on-failure
+    volumes:
+      - ./dbmigrator.json:/App/appsettings.json:rw
+    network_mode: service:redis
+  did-verifier-silo:
+    build:
+      args:
+        branch: "${BRANCH}"
+        servicename: CAVerifierServer.Silo
+    restart: on-failure:5
+    volumes:
+      - ./silo.json:/App/appsettings.json:rw
+    network_mode: service:redis
+  did-verifier-api:
+    build:
+      args:
+        branch: "${BRANCH}"
+        servicename: CAVerifierServer.HttpApi.Host
+    restart: on-failure:5
+    volumes:
+      - ./httpapi.json:/App/appsettings.json:rw
+    network_mode: service:redis

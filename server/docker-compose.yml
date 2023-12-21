@@ -1,0 +1,83 @@
+version: "3.9"
+
+name: portkey-did-server
+services:
+  redis:
+    image: redis
+    ports:
+      - 4200:4200
+  mongodb:
+    image: mongo
+    network_mode: service:redis
+  elasticsearch:
+    image: elasticsearch:7.8.0
+    network_mode: service:redis
+    volumes:
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+  rabbitmq:
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+      - RABBITMQ_DEFAULT_VHOST=/
+    image: rabbitmq:management
+    network_mode: service:redis
+  did-server-dbmigrator:
+    build:
+      args:
+        branch: "${BRANCH}"
+        servicename: CAServer.DbMigrator
+    restart: on-failure
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./dbmigrator.json:/App/appsettings.json:rw
+    network_mode: service:redis
+  did-server-silo:
+    build:
+      args:
+        branch: "${BRANCH}"
+        servicename: CAServer.Silo
+    restart: on-failure:5
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./silo.json:/App/appsettings.json:rw
+    network_mode: service:redis
+  did-server-signature:
+    build:
+      args:
+        branch: "${BRANCH}"
+        servicename: CAServer.Signature.HttpApi.Host
+    restart: on-failure:5
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./signature.json:/App/appsettings.json:rw
+    network_mode: service:redis
+  did-server-api:
+    build:
+      args:
+        branch: "${BRANCH}"
+        servicename: CAServer.HttpApi.Host
+    restart: on-failure:5
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./httpapi.json:/App/appsettings.json:rw
+    network_mode: service:redis
+  did-server-authserver:
+    build:
+      args:
+        branch: "${BRANCH}"
+        servicename: CAServer.HttpApi.AuthServer
+    restart: on-failure:5
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./authserver.json:/App/appsettings.json:rw
+    network_mode: service:redis
+  did-server-background:
+    build:
+      args:
+        branch: "${BRANCH}"
+        servicename: CAServer.BackGround
+    restart: on-failure:5
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./background.json:/App/appsettings.json:rw
+    network_mode: service:redis

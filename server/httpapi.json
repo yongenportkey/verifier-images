@@ -3,32 +3,32 @@
     "CorsOrigins": "https://*.CAServer.com,http://localhost:4200"
   },
   "ConnectionStrings": {
-    "Default": "mongodb://admin:admin123@mongodb:27017/CAServer?authSource=admin"
+    "Default": "mongodb://127.0.0.1:27017/CAVerifierServer?authSource=admin"
   },
   "Redis": {
-    "Configuration": "redis"
+    "Configuration": "127.0.0.1"
   },
   "AuthServer": {
-    "Authority": "http://did-server-auth",
+    "Authority": "http://127.0.0.1:8080",
     "RequireHttpsMetadata": "false",
     "SwaggerClientId": "CAServer_App"
   },
   "StringEncryption": {
-    "DefaultPassPhrase": "gaMgs0gtsqpYZUTn"
+    "DefaultPassPhrase": "XXXXXX"
   },
   "Orleans": {
     "ClusterId": "CAServerSiloCluster",
     "ServiceId": "CAServerOrleansBasicService",
-    "MongoDBClient": "mongodb://admin:admin123@mongodb:27017/?maxPoolSize=555",
+    "MongoDBClient": "mongodb://127.0.0.1:27017/?maxPoolSize=555",
     "DataBase": "CAServerOrleansDB"
   },
   "RabbitMQ": {
     "Connections": {
       "Default": {
-        "HostName": "rabbitmq",
+        "HostName": "127.0.0.1",
         "Port": "5672",
         "UserName": "admin",
-        "Password": "admin123456"
+        "Password": "admin"
       }
     },
     "EventBus": {
@@ -49,7 +49,7 @@
     }
   },
   "GraphQL": {
-    "Configuration": "http://127.0.0.1:8083/Indexer_DApp/PortKeyIndexerCASchema/graphql"
+    "Configuration": "https://dapp-portkey-test.portkey.finance/Portkey_DID/PortKeyIndexerCASchema/graphql"
   },
   "Serilog": {
     "MinimumLevel": {
@@ -83,14 +83,20 @@
       "AELF": {
         "ChainId": "AELF",
         "BaseUrl": "http://127.0.0.1:8000",
-        "ContractAddress": "***",
-        "PrivateKey": "***"
+        "ContractAddress": "2u6Dd139bHvZJdZ835XnNKL5y6cxqzV9PEWD5fZdQXdFZLgevc",
+        "TokenContractAddress": "JRmBduh4nXWi1aXgdUsj5gJrzeZb2LxmrAbf7W99faZSvoAaE",
+        "CrossChainContractAddress": "2SQ9LeGZYSWmfJcYuQkDQxgd3HzwjamAaaL4Tge2eFSXw2cseq",
+        "PrivateKey": "XXXXXX",
+        "IsMainChain": true
       },
       "tDVV": {
         "ChainId": "tDVV",
         "BaseUrl": "http://127.0.0.1:8000",
-        "ContractAddress": "***",
-        "PrivateKey": "***"
+        "ContractAddress": "2iNerrufZ7rQsj5Ea6Rpbi9G4GMNyTMNe9CBhBUocE9JHnUYJC",
+        "TokenContractAddress": "7RzVGiuVWkvL4VfVHdZfQF2Tri3sgLe9U991bohHFfSRZXuGX",
+        "CrossChainContractAddress": "2snHc8AMh9QMbCAa7XXmdZZVM5EBZUUPDdLjemwUJkBnL6k8z9",
+        "PrivateKey": "XXXXXX",
+        "IsMainChain": false
       }
     }
   },
@@ -106,9 +112,7 @@
     "HttpConnectTimeOut": 5
   },
   "ElasticUris": {
-    "Uris": [
-      "http://elasticsearch:9200"
-    ]
+    "Uris": ["http://127.0.0.1:9200"]
   },
   "IndexSetting": {
     "NumberOfShards": 5,
@@ -126,15 +130,11 @@
     "ExpirationDays": 365
   },
   "AppleAuth": {
-    "Audiences": [
-      "com.portkey.did",
-      "did.portkey",
-      "com.portkey.did.tran"
-    ],
+    "Audiences": ["com.portkey.did", "did.portkey", "com.portkey.did.tran"],
     "RedirectUrl": "https://portkey-website-dev.vercel.app/apple-auth",
     "BingoRedirectUrl": "https://portkey-bingo-game-sand.vercel.app",
     "ExtensionConfig": {
-      "PrivateKey": "***",
+      "PrivateKey": "XXXXXX",
       "TeamId": "956XWQ54U7",
       "ClientId": "did.portkey",
       "KeyId": "VHLNFZRS9F"
@@ -168,7 +168,7 @@
     "Key": "12345678901234567890123456789012"
   },
   "AppleCache": {
-    "Configuration": "redis:6379",
+    "Configuration": "127.0.0.1:6379",
     "Db": 2
   },
   "Switch": {
@@ -185,22 +185,18 @@
       "WEB": ""
     },
     "VerifyUrl": "https://www.google.com/recaptcha/api/siteverify",
-    "RecaptchaUrls": [
-      "/api/app/account/sendVerificationRequest"
-    ]
+    "RecaptchaUrls": ["/api/app/account/sendVerificationRequest"]
   },
   "SendVerifierCodeRequestLimit": {
     "Limit": 1000,
     "ExpireHours": 1
   },
   "ClaimTokenWhiteListAddresses": {
-    "WhiteListAddresses": [
-      "DkEdTnymgzVqHmLcGWXiZZuA2A1MeRvC6728BN8yvdGJP7qpC"
-    ]
+    "WhiteListAddresses": ["DkEdTnymgzVqHmLcGWXiZZuA2A1MeRvC6728BN8yvdGJP7qpC"]
   },
   "ClaimTokenInfo": {
     "ChainId": "AELF",
-    "PrivateKey": "***",
+    "PrivateKey": "XXXXXX",
     "ClaimTokenAddress": "2UM9eusxdRyCztbmMZadGXzwgwKfFdk8pF4ckw58D769ehaPSR",
     "ExpireTime": 1,
     "ClaimTokenAmount": 10000000000,
@@ -208,8 +204,8 @@
   },
   "GoogleAuth": {
     "AuthUrl": "https://oauth2.googleapis.com/token",
-    "ClientId": "***",
-    "ClientSecret": "***",
+    "ClientId": "XXXXXX.apps.googleusercontent.com",
+    "ClientSecret": "XXXXXX",
     "RedirectUri": "https://localtest-applesign2.portkey.finance"
   },
   "SignatureServer": {
@@ -219,11 +215,7 @@
     "CommonPrivateKeyForCallTx": ""
   },
   "EsIndexBlacklist": {
-    "Indexes": [
-      "guardianindex",
-      "userextrainfoindex",
-      "orderindex"
-    ]
+    "Indexes": ["guardianindex", "userextrainfoindex", "orderindex"]
   },
   "TransactionFeeInfo": {
     "TransactionFees": [
@@ -244,8 +236,5 @@
         }
       }
     ]
-  },
-  "RealIp": {
-    "HeaderKey": "X-Forwarded-For"
   }
 }
