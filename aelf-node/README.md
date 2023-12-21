@@ -2,8 +2,8 @@
 
 ## Pre-requisites
 
-Docker: https://www.docker.com/
-aelf-command: https://docs.aelf.io/en/latest/reference/cli/introduction.html#install-aelf-command
+- Docker: https://www.docker.com/
+- aelf-command: https://docs.aelf.io/en/latest/reference/cli/introduction.html#install-aelf-command
 
 ## Set up
 
