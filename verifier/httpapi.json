@@ -14,7 +14,7 @@
     "SwaggerClientId": "CAVerifierServer_Swagger"
   },
   "StringEncryption": {
-    "DefaultPassPhrase": "BaVQBcEqaSRF7Pz0"
+    "DefaultPassPhrase": "***"
   },
   "Settings": {
     "Abp.Mailing.Smtp.Host": "smtppro.zoho.com",
@@ -119,9 +119,7 @@
     "Address": "XXXXX"
   },
   "AppleAuth": {
-    "Audiences": [
-      "com.portkey.did"
-    ]
+    "Audiences": ["com.portkey.did"]
   },
   "SmsService": {
     "SmsServiceInfos": {

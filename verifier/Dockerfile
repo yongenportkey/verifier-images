@@ -4,6 +4,7 @@ ARG branch=master
 RUN git clone https://github.com/Portkey-Wallet/portkey-DID-verifier.git
 WORKDIR /App/portkey-DID-verifier
 RUN git checkout $branch
+RUN sed -i 's/app.UseMiddleware<RealIpMiddleware>();//g' src/CAVerifierServer.HttpApi.Host/CAVerifierServerHttpApiHostModule.cs
 RUN dotnet restore -s https://api.nuget.org/v3/index.json -s https://www.myget.org/F/aelf-project-dev/api/v3/index.json
 
 FROM fetch-env AS build-env
