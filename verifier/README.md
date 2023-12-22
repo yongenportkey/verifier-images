@@ -15,3 +15,11 @@ BRANCH=3a72fbf823f50d2e267bd3a814e9f34713fdeb71
 ## Start the server
 
 Run `docker-compose up -d`.
+
+## Rebuild
+
+If you need to rebuild the docker image, use this command instead:
+
+```bash
+docker-compose up -d --build
+```

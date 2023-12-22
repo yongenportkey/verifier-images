@@ -42,3 +42,11 @@ Edit `appsettings.json` and modify:
 ## Start the node
 
 Run `docker-compose up -d`.
+
+## Rebuild
+
+If you need to rebuild the docker image, use this command instead:
+
+```bash
+docker-compose up -d --build
+```
