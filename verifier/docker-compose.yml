@@ -5,7 +5,7 @@ services:
   redis:
     image: redis
     ports:
-      - 5577:5577
+      - 5588:5588
   mongodb:
     image: mongo
     network_mode: service:redis

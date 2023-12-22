@@ -2,22 +2,19 @@ version: "3.9"
 
 name: aelf-node
 services:
-    standalone-testing-node:
-        restart: on-failure:5
-        stdin_open: true
-        tty: true
-        ports:
-            - 6801:6801
-            - 8000:8000
-            - 5001:5001
-            - 5011:5011
-        platform: linux/amd64
-        ulimits:
-            core: -1
-        security_opt:
-            - seccomp=unconfined
-        privileged: true
-        image: aelf/standalone-testing-node
-        volumes:
-            - ./appsettings.json:/app/appsettings.json:rw
-            - ~/.local/share/aelf/keys:/root/.local/share/aelf/keys
+  standalone-testing-node:
+    restart: on-failure:5
+    stdin_open: true
+    tty: true
+    ports:
+      - 8000:8000
+    platform: linux/amd64
+    ulimits:
+      core: -1
+    security_opt:
+      - seccomp=unconfined
+    privileged: true
+    image: aelf/standalone-testing-node
+    volumes:
+      - ./appsettings.json:/app/appsettings.json:rw
+      - ~/.local/share/aelf/keys:/root/.local/share/aelf/keys

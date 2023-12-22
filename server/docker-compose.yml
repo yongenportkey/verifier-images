@@ -5,7 +5,7 @@ services:
   redis:
     image: redis
     ports:
-      - 4200:4200
+      - 5577:5577
   mongodb:
     image: mongo
     network_mode: service:redis
@@ -61,6 +61,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ./httpapi.json:/App/appsettings.json:rw
     network_mode: service:redis
+    environment:
+      - DOTNET_ENVIRONMENT=Development
   did-server-authserver:
     build:
       args:
